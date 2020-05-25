@@ -7,8 +7,20 @@ Route::prefix('admin')
         ->group(function(){
 
             /*
+                Permission x Profile
+            */
+            Route::get('profiles/{id}/permissions', 'ACL\PermissionProfileController@permissions')->name('profiles.permissions');
+
+            /*
+                Rotas de Permissions
+            */
+            Route::any('permissions/search', 'ACL\PermissionController@search')->name('permissions.search');
+            Route::resource('permissions', 'ACL\PermissionController');
+
+            /*
                 Rotas de Perfis
             */
+            Route::any('profiles/search', 'ACL\ProfileController@search')->name('profiles.search');
             Route::resource('profiles', 'ACL\ProfileController');
 
             /*

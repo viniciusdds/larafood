@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Profile extends Model
+class Permission extends Model
 {
     protected $fillable = [
         'name',
@@ -12,10 +12,10 @@ class Profile extends Model
     ];
 
     /*
-        obter as permissões
+        obter os perfis
     */
-    public function permissions()
+    public function profiles()
     {
-        return $this->belongsToMany(Permission::class);
+        return $this->belongsToMany(Profile::class);
     }
 }

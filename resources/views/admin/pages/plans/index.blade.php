@@ -4,7 +4,7 @@
 
 @section('content_header')
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('plans.index') }}">Dashboard</a></li>
         <li class="breadcrumb-item active"><a href="{{ route('plans.index') }}" class="active">Planos</a></li>
     </ol><br>
 
@@ -18,7 +18,7 @@
                 @csrf
 
                 <div class="form-group">
-                    <input type="text" name="filter" placeholder="Nome" class="form-control" value="{{ $filters['filter'] ?? '' }}">
+                    <input type="text" name="filter" placeholder="Pesquisa" class="form-control" value="{{ $filters['filter'] ?? '' }}">
                 </div>
                 <button type="submit" class="btn btn-dark"><i class="fas fa-search"></i></button>
             </form>
