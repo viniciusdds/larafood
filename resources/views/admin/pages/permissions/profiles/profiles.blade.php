@@ -1,15 +1,14 @@
 @extends('adminlte::page')
 
-@section('title', "Permissões do Perfil {$profile->name}")
+@section('title', "Perfis da Permissão {$permission->name}")
 
 @section('content_header')
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('profiles.index') }}">Dashboard</a></li>
-        <li class="breadcrumb-item active"><a href="{{ route('profiles.index') }}" class="active">Perfis</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('permissions.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item active"><a href="{{ route('permissions.index') }}" class="active">Perfis</a></li>
     </ol><br>
 
-    <h1>Permissões do Perfil <b>{{ $profile->name }}</b></h1>
-        <a href="{{ route('profiles.permissions.available', $profile->id) }}" class="btn btn-dark"><i class="fas fa-plus-square"></i> &nbsp;ADD NOVA PERMISSÃO</a>
+    <h1>Perfis da Permissão <b>{{ $permission->name }}</b></h1>
     
 @stop
 
@@ -24,13 +23,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($permissions as $permission)
+                    @foreach ($profiles as $profile)
                         <tr>
                             <td>
-                                {{ $permission->name }}
+                                {{ $profile->name }}
                             </td>
                             <td style="width: 10px;">
-                                <a href="{{ route('profiles.permissions.detach', [$profile->id, $permission->id]) }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                <a href="{{ route('permissions.profiles.detach', [$permission->id, $profile->id]) }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
                     @endforeach
@@ -39,9 +38,9 @@
         </div>
         <div class="card-footer">
             @if (isset($filters))
-                {!! $permissions->appends($filters)->links() !!}
+                {!! $profiles->appends($filters)->links() !!}
             @else
-                {!! $permissions->links() !!}
+                {!! $profiles->links() !!}
             @endif
             
         </div>

@@ -41,6 +41,7 @@
                                 {{-- <a href="{{ route('details.permissions.index', $permission->url) }}" class="btn btn-primary">Detalhes</a> --}}
                                 <a href="{{ route('permissions.edit', $permission->id) }}" class="btn btn-info">Editar</a>
                                 <a href="{{ route('permissions.show', $permission->id) }}" class="btn btn-warning">VER</a>
+                                <a href="{{ route('permissions.profiles', $permission->id) }}" class="btn btn-info"><i class="fas fa-address-book"></i></a>
                             </td>
                         </tr>
                     @endforeach
