@@ -4,7 +4,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')
         ->namespace('Admin')
+        ->middleware('auth')
         ->group(function(){
+
+            /*
+                Plan x Profile
+            */
+            Route::get('plans/{id}/profile/{idProfile}/detach', 'ACL\PlanProfileController@detachProfilesPlan')->name('plans.profile.detach');
+            Route::post('plans/{id}/profiles', 'ACL\PlanProfileController@attachProfilesPlan')->name('plans.profiles.attach');
+            Route::any('plans/{id}/profiles/create', 'ACL\PlanProfileController@profilesAvailable')->name('plans.profiles.available');
+            Route::get('plans/{id}/profiles', 'ACL\PlanProfileController@profiles')->name('plans.profiles');
+            Route::get('profiles/{id}/plans', 'ACL\PlanProfileController@plans')->name('profiles.plans');
+
 
             /*
                 Permission x Profile
@@ -54,10 +65,14 @@ Route::prefix('admin')
             /*
                 Home Dashboard
             */
-            Route::get('admin', 'Admin\PlanController@index')->name('admin.index');
+            Route::get('/', 'PlanController@index')->name('admin.index');
 });
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Site\SiteController@index')->name('site.home');
+
+/* 
+    Rotas de Autenticação
+*/
+Auth::routes();
+
