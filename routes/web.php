@@ -8,6 +8,12 @@ Route::prefix('admin')
         ->group(function(){
 
             /*
+                Rotas de Users
+            */
+            Route::any('users/search', 'UserController@search')->name('users.search');
+            Route::resource('users', 'UserController');
+
+            /*
                 Plan x Profile
             */
             Route::get('plans/{id}/profile/{idProfile}/detach', 'ACL\PlanProfileController@detachProfilesPlan')->name('plans.profile.detach');
@@ -71,12 +77,9 @@ Route::prefix('admin')
 /*
     Site
 */
-//Route::prefix('site')
-//        ->namespace('Site')
-//        ->group(function(){
-            Route::get('/plan/{url}', 'Site\SiteController@plan')->name('plan.subscription');
-            Route::get('/', 'Site\SiteController@index')->name('site.home');
-//});
+Route::get('/plan/{url}', 'Site\SiteController@plan')->name('plan.subscription');
+Route::get('/', 'Site\SiteController@index')->name('site.home');
+
 
 /* 
     Rotas de Autenticação
