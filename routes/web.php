@@ -42,12 +42,12 @@ Route::prefix('admin')
             /*
                 Rotas do Detalhes do Plano  
             */
+            Route::get('plans/{url}/details/create', 'DetailPlanController@create')->name('details.plan.create');
             Route::delete('plans/{url}/details/{id}', 'DetailPlanController@destroy')->name('details.plan.destroy');
             Route::get('plans/{url}/details/{id}', 'DetailPlanController@show')->name('details.plan.show');
             Route::put('plans/{url}/details/{id}', 'DetailPlanController@update')->name('details.plan.update');
             Route::get('plans/{url}/details/{id}/edit', 'DetailPlanController@edit')->name('details.plan.edit');
             Route::post('plans/{url}/details', 'DetailPlanController@store')->name('details.plan.store');
-            Route::get('plans/{url}/details/create', 'DetailPlanController@create')->name('details.plan.create');
             Route::get('plans/{url}/details', 'DetailPlanController@index')->name('details.plan.index');
 
             /*
@@ -68,8 +68,15 @@ Route::prefix('admin')
             Route::get('/', 'PlanController@index')->name('admin.index');
 });
 
-
-Route::get('/', 'Site\SiteController@index')->name('site.home');
+/*
+    Site
+*/
+//Route::prefix('site')
+//        ->namespace('Site')
+//        ->group(function(){
+            Route::get('/plan/{url}', 'Site\SiteController@plan')->name('plan.subscription');
+            Route::get('/', 'Site\SiteController@index')->name('site.home');
+//});
 
 /* 
     Rotas de Autenticação
