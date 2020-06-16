@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', "Detalhes do usuário {$user->name}")
+@section('title', "Detalhes da categoria {$category->name}")
 
 @section('content_header')
-    <h1>Detalhes do usuário <b>{{ $user->name }}</b></h1>
+    <h1>Detalhes da categoria <b>{{ $category->name }}</b></h1>
 @stop
 
 @section('content')
@@ -11,23 +11,23 @@
         <div class="card-body">
             <ul>
                 <li>
-                    <strong>Nome: </strong> {{ $user->name }}
+                    <strong>Nome: </strong> {{ $category->name }}
                 </li>
                 <li>
-                    <strong>Email: </strong> {{ $user->email }}
+                    <strong>URL: </strong> {{ $category->url }}
                 </li>
                 <li>
-                    <strong>Empresa: </strong> {{ $user->tenant->name }}
+                    <strong>Descrição: </strong> {{ $category->description }}
                 </li>
             </ul>
 
             @include('admin.includes.alerts')
 
-            <form action="{{ route('users.destroy', $user->id) }}" method="POST">
+            <form action="{{ route('categories.destroy', $category->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
 
-                <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> &nbsp;{{ $user->name }}</button>
+                <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> &nbsp;{{ $category->name }}</button>
             </form>
         <div>
     </div>

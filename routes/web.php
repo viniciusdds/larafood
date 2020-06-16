@@ -8,6 +8,12 @@ Route::prefix('admin')
         ->group(function(){
 
             /*
+                Rotas de Products
+            */
+            Route::any('products/search', 'ProductController@search')->name('products.search');
+            Route::resource('products', 'ProductController');
+
+            /*
                 Rotas de Categories
             */
             Route::any('categories/search', 'CategoryController@search')->name('categories.search');
