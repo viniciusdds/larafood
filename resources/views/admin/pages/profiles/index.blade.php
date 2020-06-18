@@ -4,11 +4,15 @@
 
 @section('content_header')
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('profiles.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
         <li class="breadcrumb-item active"><a href="{{ route('profiles.index') }}" class="active">Perfis</a></li>
     </ol><br>
 
-    <h1>Perfis <a href="{{ route('profiles.create') }}" class="btn btn-dark"><i class="fas fa-plus-square"></i> &nbsp;ADD</a></h1>
+    <h1>Perfis 
+        @can('add_perf')
+            <a href="{{ route('profiles.create') }}" class="btn btn-dark"><i class="fas fa-plus-square"></i> &nbsp;ADD</a>
+        @endcan
+    </h1>
 @stop
 
 @section('content')
@@ -38,8 +42,12 @@
                                 {{ $profile->name }}
                             </td>
                             <td style="width: 10px;">
-                                <a href="{{ route('profiles.edit', $profile->id) }}" class="btn btn-info">Editar</a>
-                                <a href="{{ route('profiles.show', $profile->id) }}" class="btn btn-warning">VER</a>
+                                @can('edit_perf')
+                                    <a href="{{ route('profiles.edit', $profile->id) }}" class="btn btn-info">Editar</a>
+                                @endcan
+                                @can('del_perf')
+                                    <a href="{{ route('profiles.show', $profile->id) }}" class="btn btn-warning">VER</a>
+                                @endcan    
                                 <a href="{{ route('profiles.permissions', $profile->id) }}" class="btn btn-warning"><i class="fas fa-lock"></i></a>
                                 <a href="{{ route('profiles.plans', $profile->id) }}" class="btn btn-info"><i class="fas fa-list-alt"></i></a>
                             </td>

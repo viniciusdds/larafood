@@ -4,11 +4,15 @@
 
 @section('content_header')
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('permissions.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
         <li class="breadcrumb-item active"><a href="{{ route('permissions.index') }}" class="active">Permissões</a></li>
     </ol><br>
 
-    <h1>Permissões <a href="{{ route('permissions.create') }}" class="btn btn-dark"><i class="fas fa-plus-square"></i> &nbsp;ADD</a></h1>
+    <h1>Permissões 
+        @can('add_perm')
+            <a href="{{ route('permissions.create') }}" class="btn btn-dark"><i class="fas fa-plus-square"></i> &nbsp;ADD</a>
+        @endcan
+    </h1>
 @stop
 
 @section('content')
@@ -39,8 +43,12 @@
                             </td>
                             <td style="width: 10px;">
                                 {{-- <a href="{{ route('details.permissions.index', $permission->url) }}" class="btn btn-primary">Detalhes</a> --}}
-                                <a href="{{ route('permissions.edit', $permission->id) }}" class="btn btn-info">Editar</a>
-                                <a href="{{ route('permissions.show', $permission->id) }}" class="btn btn-warning">VER</a>
+                                @can('edit_perm')
+                                    <a href="{{ route('permissions.edit', $permission->id) }}" class="btn btn-info">Editar</a>
+                                @endcan
+                                @can('del_perm')
+                                    <a href="{{ route('permissions.show', $permission->id) }}" class="btn btn-warning">VER</a> 
+                                @endcan
                                 <a href="{{ route('permissions.profiles', $permission->id) }}" class="btn btn-info"><i class="fas fa-address-book"></i></a>
                             </td>
                         </tr>

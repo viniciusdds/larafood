@@ -10,8 +10,10 @@
     </ol><br>
 
     <h1>Perfis do Plano <b>{{ $plan->name }}</b></h1>
-        <a href="{{ route('plans.profiles.available', $plan->id) }}" class="btn btn-dark"><i class="fas fa-plus-square"></i> &nbsp;ADD NOVO PERFIL</a>
-    
+        @can('add_perf')
+            <a href="{{ route('plans.profiles.available', $plan->id) }}" class="btn btn-dark"><i class="fas fa-plus-square"></i> &nbsp;ADD NOVO PERFIL</a>
+        @endcan
+        
 @stop
 
 @section('content')
@@ -31,7 +33,9 @@
                                 {{ $profile->name }}
                             </td>
                             <td style="width: 10px;">
-                                <a href="{{ route('plans.profile.detach', [$plan->id, $profile->id]) }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                @can('del_perf')
+                                    <a href="{{ route('plans.profile.detach', [$plan->id, $profile->id]) }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

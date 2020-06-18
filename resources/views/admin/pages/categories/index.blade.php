@@ -4,11 +4,15 @@
 
 @section('content_header')
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('categories.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
         <li class="breadcrumb-item active"><a href="{{ route('categories.index') }}" class="active">Categorias</a></li>
     </ol><br>
 
-    <h1>Categorias <a href="{{ route('categories.create') }}" class="btn btn-dark"><i class="fas fa-plus-square"></i> &nbsp;ADD</a></h1>
+    <h1>Categorias 
+        @can('add_cat')
+        <a href="{{ route('categories.create') }}" class="btn btn-dark"><i class="fas fa-plus-square"></i> &nbsp;ADD</a>
+        @endcan
+    </h1>
 @stop
 
 @section('content')
@@ -38,8 +42,12 @@
                             <td>{{ $category->name }}</td>
                             <td>{{ $category->description }}</td>
                             <td style="width: 10px;">
-                                <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-info">Editar</a>
-                                <a href="{{ route('categories.show', $category->id) }}" class="btn btn-warning">VER</a>   
+                                @can('edit_cat')
+                                    <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-info">Editar</a>
+                                @endcan
+                                @can('del_cat')
+                                    <a href="{{ route('categories.show', $category->id) }}" class="btn btn-warning">VER</a>
+                                @endcan            
                             </td>
                         </tr>
                     @endforeach

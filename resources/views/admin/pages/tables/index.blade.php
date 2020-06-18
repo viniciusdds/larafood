@@ -4,11 +4,15 @@
 
 @section('content_header')
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('tables.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
         <li class="breadcrumb-item active"><a href="{{ route('tables.index') }}" class="active">Mesas</a></li>
     </ol><br>
 
-    <h1>Mesas <a href="{{ route('tables.create') }}" class="btn btn-dark"><i class="fas fa-plus-square"></i> &nbsp;ADD</a></h1>
+    <h1>Mesas 
+        @can('add_tab')
+            <a href="{{ route('tables.create') }}" class="btn btn-dark"><i class="fas fa-plus-square"></i> &nbsp;ADD</a> 
+        @endcan
+    </h1>
 @stop
 
 @section('content')
@@ -38,8 +42,12 @@
                             <td>{{ $table->identify }}</td>
                             <td>{{ $table->description }}</td>
                             <td style="width: 10px;">
-                                <a href="{{ route('tables.edit', $table->id) }}" class="btn btn-info">Editar</a>
-                                <a href="{{ route('tables.show', $table->id) }}" class="btn btn-warning">VER</a>   
+                                @can('edit_tab')
+                                    <a href="{{ route('tables.edit', $table->id) }}" class="btn btn-info">Editar</a> 
+                                @endcan
+                                @can('del_tab')
+                                    <a href="{{ route('tables.show', $table->id) }}" class="btn btn-warning">VER</a>    
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

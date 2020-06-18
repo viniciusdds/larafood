@@ -4,11 +4,15 @@
 
 @section('content_header')
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('products.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
         <li class="breadcrumb-item active"><a href="{{ route('products.index') }}" class="active">Produtos</a></li>
     </ol><br>
 
-    <h1>Produtos <a href="{{ route('products.create') }}" class="btn btn-dark"><i class="fas fa-plus-square"></i> &nbsp;ADD</a></h1>
+    <h1>Produtos    
+        @can('add_prod')
+        <a href="{{ route('products.create') }}" class="btn btn-dark"><i class="fas fa-plus-square"></i> &nbsp;ADD</a>
+        @endcan
+    </h1>
 @stop
 
 @section('content')
@@ -41,8 +45,12 @@
                             <td>{{ $product->title }}</td>
                             <td style="width: 10px;">
                                 <a href="{{ route('products.categories', $product->id) }}" class="btn btn-warning" title="Categorias"><i class="fas fa-layer-group"></i></a>
-                                <a href="{{ route('products.edit', $product->id) }}" class="btn btn-info">Editar</a>
-                                <a href="{{ route('products.show', $product->id) }}" class="btn btn-warning">VER</a>   
+                                @can('edit_prod')
+                                    <a href="{{ route('products.edit', $product->id) }}" class="btn btn-info">Editar</a>
+                                @endcan
+                                @can('del_prod')
+                                    <a href="{{ route('products.show', $product->id) }}" class="btn btn-warning">VER</a>    
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

@@ -7,6 +7,16 @@ Route::prefix('admin')
         ->middleware('auth')
         ->group(function(){
 
+            // Route::get('test-acl', function(){
+            //     dd(auth()->user()->permissions());
+            // });
+
+            /* 
+                Rota Tenants
+            */
+            Route::any('tenants/search', 'TenantController@search')->name('tenants.search');
+            Route::resource('tenants', 'TenantController');
+
             /* 
                 Rotas de Mesas
             */

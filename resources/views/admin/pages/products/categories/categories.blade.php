@@ -10,7 +10,9 @@
     </ol><br>
 
     <h1>Categorias do produto <b>{{ $product->title }}</b></h1><br>
-        <a href="{{ route('products.categories.available', $product->id) }}" class="btn btn-dark"><i class="fas fa-plus-square"></i> &nbsp;ADD NOVA CATEGORIA</a>
+        @can('add_cat')
+            <a href="{{ route('products.categories.available', $product->id) }}" class="btn btn-dark"><i class="fas fa-plus-square"></i> &nbsp;ADD NOVA CATEGORIA</a>
+        @endcan
     
 @stop
 
@@ -31,7 +33,9 @@
                                 {{ $category->name }}
                             </td>
                             <td style="width: 10px;">
-                                <a href="{{ route('products.category.detach', [$product->id, $category->id]) }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                @can('del_cat')
+                                    <a href="{{ route('products.category.detach', [$product->id, $category->id]) }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>  
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

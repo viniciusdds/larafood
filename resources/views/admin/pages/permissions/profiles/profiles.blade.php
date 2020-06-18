@@ -29,7 +29,9 @@
                                 {{ $profile->name }}
                             </td>
                             <td style="width: 10px;">
-                                <a href="{{ route('permissions.profiles.detach', [$permission->id, $profile->id]) }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                @can('del_perf')
+                                    <a href="{{ route('permissions.profiles.detach', [$permission->id, $profile->id]) }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

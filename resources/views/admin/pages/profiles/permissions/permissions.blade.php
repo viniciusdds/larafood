@@ -9,8 +9,10 @@
     </ol><br>
 
     <h1>Permissões do Perfil <b>{{ $profile->name }}</b></h1>
-        <a href="{{ route('profiles.permissions.available', $profile->id) }}" class="btn btn-dark"><i class="fas fa-plus-square"></i> &nbsp;ADD NOVA PERMISSÃO</a>
-    
+        @can('add_perm')
+            <a href="{{ route('profiles.permissions.available', $profile->id) }}" class="btn btn-dark"><i class="fas fa-plus-square"></i> &nbsp;ADD NOVA PERMISSÃO</a>  
+        @endcan
+        
 @stop
 
 @section('content')
@@ -30,7 +32,9 @@
                                 {{ $permission->name }}
                             </td>
                             <td style="width: 10px;">
-                                <a href="{{ route('profiles.permissions.detach', [$profile->id, $permission->id]) }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                @can('del_perm')
+                                    <a href="{{ route('profiles.permissions.detach', [$profile->id, $permission->id]) }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

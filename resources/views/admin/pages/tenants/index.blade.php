@@ -1,24 +1,20 @@
 @extends('adminlte::page')
 
-@section('title', 'Usuários')
+@section('title', 'Empresas')
 
 @section('content_header')
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
-        <li class="breadcrumb-item active"><a href="{{ route('users.index') }}" class="active">Usuários</a></li>
+        <li class="breadcrumb-item active"><a href="{{ route('tenants.index') }}" class="active">Empresas</a></li>
     </ol><br>
 
-    <h1>Usuários 
-        @can('add_user')
-            <a href="{{ route('users.create') }}" class="btn btn-dark"><i class="fas fa-plus-square"></i> &nbsp;ADD</a>
-        @endcan
-    </h1>
+    <h1>Empresas</h1>
 @stop
 
 @section('content')
     <div class="card">
         <div class="card-header">
-            <form action="{{ route('users.search') }}" method="post" class="form form-inline">
+            <form action="{{ route('tenants.search') }}" method="post" class="form form-inline">
                 @csrf
 
                 <div class="form-group">
@@ -31,22 +27,24 @@
             <table class="table table-condensed">
                 <thead>
                     <tr>
+                        <th width="100">Imagem</th>
                         <th>Nome</th>
-                        <th>E-mail</th>
-                        <th width="290">Ações</th>
+                        <th width="150">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($users as $user)
+                    @foreach ($tenants as $tenant)
                         <tr>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>
+                            <td>
+                                <img src="{{ url("storage/{$tenant->logo}") }}" alt="{{ $tenant->title }}" style="max-width: 90px;">
+                            </td>
+                            <td>{{ $tenant->name }}</td>
                             <td style="width: 10px;">
-                                @can('edit_user')
-                                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info">Editar</a> 
+                                @can('edit_tenant')
+                                    <a href="{{ route('tenants.edit', $tenant->id) }}" class="btn btn-info">Editar</a> 
                                 @endcan
-                                @can('del_user')
-                                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-warning">VER</a>    
+                                @can('del_tenant')
+                                    <a href="{{ route('tenants.show', $tenant->id) }}" class="btn btn-warning">VER</a>    
                                 @endcan
                             </td>
                         </tr>
@@ -56,9 +54,9 @@
         </div>
         <div class="card-footer">
             @if (isset($filters))
-                {!! $users->appends($filters)->links() !!}
+                {!! $tenants->appends($filters)->links() !!}
             @else
-                {!! $users->links() !!}
+                {!! $tenants->links() !!}
             @endif
             
         </div>

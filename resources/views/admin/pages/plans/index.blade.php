@@ -4,11 +4,15 @@
 
 @section('content_header')
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('plans.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
         <li class="breadcrumb-item active"><a href="{{ route('plans.index') }}" class="active">Planos</a></li>
     </ol><br>
 
-    <h1>Planos <a href="{{ route('plans.create') }}" class="btn btn-dark"><i class="fas fa-plus-square"></i> &nbsp;ADD</a></h1>
+    <h1>Planos 
+        @can('add_plan')
+            <a href="{{ route('plans.create') }}" class="btn btn-dark"><i class="fas fa-plus-square"></i> &nbsp;ADD</a>
+        @endcan
+    </h1>
 @stop
 
 @section('content')
@@ -43,8 +47,12 @@
                             </td>
                             <td style="width: 10px;">
                                 <a href="{{ route('details.plan.index', $plan->url) }}" class="btn btn-primary">Detalhes</a>
-                                <a href="{{ route('plans.edit', $plan->url) }}" class="btn btn-info">Editar</a>
-                                <a href="{{ route('plans.show', $plan->url) }}" class="btn btn-warning">VER</a>
+                                @can('edit_plan')
+                                    <a href="{{ route('plans.edit', $plan->url) }}" class="btn btn-info">Editar</a>
+                                @endcan
+                                @can('del_plan')
+                                    <a href="{{ route('plans.show', $plan->url) }}" class="btn btn-warning">VER</a> 
+                                @endcan   
                                 <a href="{{ route('plans.profiles', $plan->id) }}" class="btn btn-warning"><i class="fas fa-address-book"></i></a>
                             </td>
                         </tr>
