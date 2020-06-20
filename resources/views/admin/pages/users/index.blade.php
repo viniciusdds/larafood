@@ -48,6 +48,7 @@
                                 @can('del_user')
                                     <a href="{{ route('users.show', $user->id) }}" class="btn btn-warning">VER</a>    
                                 @endcan
+                                <a href="{{ route('users.roles', $user->id) }}" class="btn btn-info" title="Cargos"><i class="fas fa-address-card"></i> Cargos</a>
                             </td>
                         </tr>
                     @endforeach
