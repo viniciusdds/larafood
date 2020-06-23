@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Route;
 
-Route::get('/tenants/{uuid}', 'TenantApiController@show');
-Route::get('/tenants', 'TenantApiController@index');             
+Route::get('/tenants/{uuid}', 'Api\TenantApiController@show');
+Route::get('/tenants', 'Api\TenantApiController@index');             
