@@ -2,6 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::post('/sanctum/token', 'Api\Auth\AuthClientController@auth');
+
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::get('/auth/me', 'Api\Auth\AuthClientController@me');
+    Route::post('/auth/logout', 'Api\Auth\AuthClientController@logout');
+});
+
  Route::group([
      'prefix' => 'V1',
      'namespace' => 'Api'
@@ -19,6 +26,8 @@ use Illuminate\Support\Facades\Route;
     Route::get('/products', 'ProductApiController@productsByTenant');
 
     Route::post('/client', 'Auth\RegisterController@store');
+
+   
 });
 
 
