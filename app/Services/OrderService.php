@@ -28,17 +28,21 @@ class OrderService
         $total = $this->getTotalOrder([]);
         $status = 'open';
         $tenantId = $this->getTenantIdByOrder($order['token_company']);
+        $comment = isset($order['comment']) ? $order['comment'] : '';
         $clientId = $this->getClientIdByOrder();
-        $tableId = $this->getTableIdByOrder($order['table']);
+        $tableId = $this->getTableIdByOrder($order['table'] ?? '');
 
         $order = $this->orderRepository->createNewOrder(
             $identify,
             $total,
             $status,
             $tenantId,
+            $comment,
             $clientId,
             $tableId
         );
+
+        return $order;
     }
 
     public function getIdentifyOrder(int $qtyCharacters = 8)
@@ -54,6 +58,10 @@ class OrderService
         $characters = $smallLetters.$numbers;
 
         $identify = substr(str_shuffle($characters), 0, $qtyCharacters);
+
+        if($this->orderRepository->getOrderByIdentify($identify)){
+            $this->getIdentifyOrder($qtyCharacters + 1);
+        }
 
         return $identify;
     } 
