@@ -8,12 +8,14 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/auth/me', 'Api\Auth\AuthClientController@me');
     Route::post('/auth/logout', 'Api\Auth\AuthClientController@logout');
 
+    Route::post('/auth/v1/orders/{identify}/evaluations', 'Api\EvaluationApiController@store');
+
     Route::get('/auth/v1/my-orders', 'Api\OrderApiController@myOrders');
     Route::post('/auth/v1/orders', 'Api\OrderApiController@store');
 });
 
  Route::group([
-     'prefix' => 'V1',
+     'prefix' => 'v1',
      'namespace' => 'Api'
  ], function () {
     Route::get('/tenants/{uuid}', 'TenantApiController@show');
