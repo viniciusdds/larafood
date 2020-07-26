@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::post('/sanctum/token', 'Api\Auth\AuthClientController@auth');
+Route::post('/auth/register', 'Api\Auth\RegisterController@store');
+Route::post('/auth/token', 'Api\Auth\AuthClientController@auth');
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/auth/me', 'Api\Auth\AuthClientController@me');
@@ -30,7 +31,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/products/{identify}', 'ProductApiController@show');
     Route::get('/products', 'ProductApiController@productsByTenant');
 
-    Route::post('/client', 'Auth\RegisterController@store');
+    //Route::post('/client', 'Auth\RegisterController@store');
 
     Route::post('/orders', 'OrderApiController@store');
     Route::get('/orders/{identify}', 'OrderApiController@show');
