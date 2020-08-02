@@ -108,4 +108,5 @@ class TableController extends Controller
 
         return view('admin.pages.tables.qrcode', compact('uri'));
     }
+    
 }
