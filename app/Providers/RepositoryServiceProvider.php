@@ -3,11 +3,6 @@
 namespace App\Providers;
 
 use App\Repositories\Contracts\{
-<<<<<<< HEAD
-    TenantRepositoryInterface,
-};
-use App\Repositories\{
-=======
     CategoryRepositoryInterface,
     ClientRepositoryInterface,
     EvaluationRepositoryInterface,
@@ -23,7 +18,6 @@ use App\Repositories\{
     OrderRepository,
     ProductRepository,
     TableRepository,
->>>>>>> master
     TenantRepository
 };
 use Illuminate\Support\ServiceProvider;
@@ -41,8 +35,7 @@ class RepositoryServiceProvider extends ServiceProvider
             TenantRepositoryInterface::class,
             TenantRepository::class
         );
-<<<<<<< HEAD
-=======
+
 
         $this->app->bind(
             CategoryRepositoryInterface::class,
@@ -73,7 +66,6 @@ class RepositoryServiceProvider extends ServiceProvider
             EvaluationRepositoryInterface::class,
             EvaluationRepository::class
         );
->>>>>>> master
     }
 
     /**

@@ -174,12 +174,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-<<<<<<< HEAD
-
-=======
         App\Providers\TelescopeServiceProvider::class,
         
->>>>>>> master
+
         App\Providers\RepositoryServiceProvider::class,
     ],
 

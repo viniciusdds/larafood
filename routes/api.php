@@ -2,10 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-<<<<<<< HEAD
 Route::get('/tenants/{uuid}', 'Api\TenantApiController@show');
 Route::get('/tenants', 'Api\TenantApiController@index');
-=======
 Route::post('/auth/register', 'Api\Auth\RegisterController@store');
 Route::post('/auth/token', 'Api\Auth\AuthClientController@auth');
 
@@ -42,4 +40,3 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 });
 
 
->>>>>>> master
